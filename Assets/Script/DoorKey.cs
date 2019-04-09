@@ -6,6 +6,7 @@ public class DoorKey : MonoBehaviour
 {
     //att
     public bool inTrigger;
+    public int idKey;
     //Trigger event
     void OnTriggerEnter(Collider other)
     {
@@ -23,6 +24,7 @@ public class DoorKey : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))//when press E key, the gameobject will be destrolled
             {                               //change the value to doorKey
                 DoorScript.doorKey = true;
+                PlayerKeys.idKeyList.Add(idKey);
                 Destroy(this.gameObject, 0.5f);
             }
         }
@@ -30,19 +32,18 @@ public class DoorKey : MonoBehaviour
 
     //GUI
     void OnGUI()
-    {
-        //TODO
-        if (DoorScript.doorKey)//you get a key, show message
-        {
-            GUI.Box(new Rect(0, 60, 200, 25), "¡You have obtained a key!");
-        }
+    {        
         if (inTrigger)//if it's inside
         {
             if (!DoorScript.doorKey)//if haven't the key, show message
             {
                 GUI.Box(new Rect(0, 60, 200, 25), "Press E to take a key");
             }
-
+            //TODO
+            if (DoorScript.doorKey)//you get a key, show message
+            {
+                GUI.Box(new Rect(0, 60, 200, 25), "¡You have obtained a key!");
+            }
         }
     }
 }
